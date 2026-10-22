@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hospital Patient Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">DATA STRUCTURES MINI PROJECT</p>
+            <h1>Smart Hospital</h1>
+            <p class="subtitle">Patient Management System</p>
+        </div>
+        <div class="status"><span></span> System Online</div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div>
+                <h2>Patient consultation dashboard</h2>
+                <p>Manage patient registration and consultation flow using a Queue and HashMap.</p>
+            </div>
+            <button class="primary" onclick="openModal()">+ Add Patient</button>
+        </section>
+
+        <section class="stats">
+            <article class="stat-card">
+                <span class="stat-label">Patients in System</span>
+                <strong id="totalPatients">0</strong>
+            </article>
+            <article class="stat-card">
+                <span class="stat-label">Waiting Queue</span>
+                <strong id="waitingCount">0</strong>
+            </article>
+            <article class="stat-card">
+                <span class="stat-label">Data Structures</span>
+                <strong>Queue + HashMap</strong>
+            </article>
+        </section>
+
+        <section class="grid">
+            <div class="panel queue-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Waiting Queue</h3>
+                        <p>FIFO — First In, First Out</p>
+                    </div>
+                    <button class="secondary" onclick="callNext()">Call Next Patient</button>
+                </div>
+
+                <div id="queueList" class="queue-list">
+                    <div class="empty">Loading patients...</div>
+                </div>
+            </div>
+
+            <aside class="panel search-panel">
+                <h3>Search Patient</h3>
+                <p>HashMap lookup by unique patient ID.</p>
+
+                <form id="searchForm">
+                    <label for="searchId">Patient ID</label>
+                    <div class="search-row">
+                        <input id="searchId" required placeholder="e.g. P001">
+                        <button class="primary" type="submit">Search</button>
+                    </div>
+                </form>
+
+                <div id="searchResult" class="search-result hidden"></div>
+
+                <div class="concept-box">
+                    <h4>Why HashMap?</h4>
+                    <p>Patient records are stored with their ID as the key, allowing fast lookup without scanning the entire queue.</p>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-card">
+            <button class="close" onclick="closeModal()">&times;</button>
+            <h2>Add New Patient</h2>
+            <p>Register a patient and add them to the consultation queue.</p>
+
+            <form id="patientForm">
+                <div class="form-grid">
+                    <div>
+                        <label for="id">Patient ID *</label>
+                        <input id="id" required placeholder="P003">
+                    </div>
+                    <div>
+                        <label for="name">Full Name *</label>
+                        <input id="name" required placeholder="Patient name">
+                    </div>
+                    <div>
+                        <label for="age">Age *</label>
+                        <input id="age" type="number" min="0" max="150" required>
+                    </div>
+                    <div>
+                        <label for="phone">Phone</label>
+                        <input id="phone" placeholder="Phone number">
+                    </div>
+                </div>
+
+                <label for="symptoms">Symptoms / Reason for Visit</label>
+                <textarea id="symptoms" rows="3" placeholder="Describe the patient's symptoms"></textarea>
+
+                <button class="primary full" type="submit">Register Patient</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
